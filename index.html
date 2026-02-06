@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 에이전트 툴 잘 물어보기</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <main class="deck">
+    <!-- 1. 발표 목적 -->
+    <section class="slide slide--intro">
+      <div class="slide-inner">
+        <div class="title-block">
+          <h1 class="title-main">
+            <span class="title-line">AI 에이전트 툴</span>
+            <span class="title-line title-line--accent">일단 물어보기</span>
+          </h1>
+          <p class="subtitle">
+            비개발자 입장에서 AI 에이전트를 어떻게 이용하고, 공부해야할지!
+          </p>
+        </div>
+        <div class="row row--intro">
+          <div class="intro-card">
+            <h2 class="intro-card-title">발표 목적</h2>
+            <div class="intro-blocks">
+              <div class="intro-block intro-block--muted">
+                <span class="intro-tag">렛서 대표님</span>
+                <p class="intro-desc">AI 에이전트 <strong>왜 써야 하는지</strong></p>
+              </div>
+              <div class="intro-block intro-block--muted">
+                <span class="intro-tag">개발자</span>
+                <p class="intro-desc">제가 만든 AI 사진 분석 웹페이지 <strong>만드는 상세한 과정</strong><br /><span
+                    class="intro-muted">(개발자 분들이 더 완성도 높고 배울 게 많음)</span></p>
+              </div>
+              <div class="intro-block intro-block--focus">
+                <div class="intro-tags-row">
+                  <span class="intro-tag">비개발자</span>
+                  <span class="intro-tag">기획자</span>
+                  <span class="intro-tag">주니어</span>
+                </div>
+                <p class="intro-desc">그래서 여기서 전달하고자 하는 건, “꼭 써야만 하는 이유”나 “개발자 수준 지식”이 <strong>아니라</strong></p>
+                <p class="intro-punchline">비개발자 입장에서 AI 에이전트를 <strong>어떻게 이용하고, 공부해야할지!</strong></p>
+              </div>
+            </div>
+          </div>
+          <div class="intro-visual" aria-hidden="true">
+            <div class="intro-visual-scene">
+              <div class="intro-visual-glow"></div>
+              <img src="./character.png" alt="Surprised Character" class="intro-character-img" id="floatingCharacter" />
+              <div class="intro-visual-text">
+                <p class="intro-visual-line intro-visual-line--big">이게 돼?!</p>
+                <p class="intro-visual-line intro-visual-line--sub">안되는게 없어!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 들어가기 전에 참고사항 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="eyebrow">그 전에</div>
+        <div class="headline-block">
+          <p class="headline">
+            <span class="headline-line headline-line--accent">본격적인 발표에 앞서 참고해 주세요 🙏</span>
+          </p>
+        </div>
+
+        <div class="grid grid--three">
+          <!-- Point 1 -->
+          <div class="grid-card grid-card--accent">
+            <div class="grid-card-icon">🤖</div>
+            <div class="grid-title">질문은 AI에게...?</div>
+            <p class="grid-desc">
+              아마 이 발표가 끝나고 저에게 하시는 기술적인 질문들...<br />
+              → <strong>대부분 저도 모를 확률이 높습니다.</strong><br />
+              저보다 AI에게 물어보는 게 훨씬 빠르고 정확할 수 있어요!
+            </p>
+          </div>
+
+          <!-- Point 2 -->
+          <div class="grid-card">
+            <div class="grid-card-icon">🛠️</div>
+            <div class="grid-title">바이브 코딩 ≠ 만능</div>
+            <p class="grid-desc">
+              간단한 도구나 MVP는 비개발자도 뚝딱 만들 수 있습니다.<br />
+              하지만 <strong>복잡한 비즈니스 모델과 대규모 트래픽</strong>을 다루는 서비스라면?
+              <span class="text-accent">개발자님들의 전문성이 필수적입니다.</span>
+            </p>
+          </div>
+
+          <!-- Point 3 -->
+          <div class="grid-card">
+            <div class="grid-card-icon">🐛</div>
+            <div class="grid-title">'일단 물어보기'이지만...?</div>
+            <p class="grid-desc">
+              깊은 이해 없이 질문만 던지다 보면
+              <strong>스파게티 코드와 버그의 늪</strong>에 빠질 수도 있다는 점...
+              (그래도 일단 시작해보자구요!)
+            </p>
+          </div>
+        </div>
+
+        <div class="note-card note-card--simple mt-40">
+          <div class="note-with-character">
+            <p class="note-p text-center">
+              이 발표는 <strong>생산성 향상과 새로운 시도</strong>를 위한 가벼운 제안으로 들어주시면 감사하겠습니다.
+            </p>
+            <img src="./character_pray.png" alt="Praying Character" class="slide-character-float" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2.5. 캠핏 AI 그로쓰 에디터 소개 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="eyebrow">프로젝트 배경</div>
+        <div class="headline-block">
+          <p class="headline">
+            <span class="headline-line headline-line--accent">캠핏 내 캠핑장 사진 퀄리티 향상 프로젝트</span>
+          </p>
+        </div>
+        <p class="body-text" style="margin-bottom: 16px;">
+          슈퍼팬/크리에이터 등 <strong>캠핏 내 팬덤을 통해서 사진 확보</strong> → 근데 이게 쉽지가 않다...
+        </p>
+
+        <div class="project-layout">
+          <!-- 왼쪽: 대화 말풍선 -->
+          <div class="conversation-section">
+            <div class="chat-bubble chat-bubble--request">
+              <div class="chat-label">🏕️ 캠핑장 운영자</div>
+              <p class="chat-text">"A 캠핑장 크리에이터 보내주세요"</p>
+            </div>
+            <div class="chat-bubble chat-bubble--response">
+              <div class="chat-label">🙋 담당자 (나)</div>
+              <p class="chat-text">"아.. 아마 안갈텐데..<br />일단 리스트에는 넣어드릴게요"</p>
+            </div>
+            <div class="thought-bubble">
+              <div class="thought-label">💭 속마음</div>
+              <p class="thought-text">
+                거기는 지금 내가 봤을 때 인플루언서 마케팅을 할 게 아니라,<br />
+                <strong>캠핑장 컨설팅을 받고</strong>, <span class="text-accent">전문 사진가부터 불러서<br />캠핑장 사진부터 바꿔야</span> 할 것 같은데...
+              </p>
+            </div>
+          </div>
+
+          <!-- 오른쪽: 웹사이트 임베디드 -->
+          <div class="embed-section">
+            <div class="embed-card">
+              <div class="embed-header">
+                <span class="embed-badge">🌐 Live Demo</span>
+                <span class="embed-url">camfit.vercel.app</span>
+              </div>
+              <div class="embed-body">
+                <iframe src="https://camfit.vercel.app/" class="embed-iframe" title="Camfit AI Growth Editor"
+                  loading="lazy"></iframe>
+              </div>
+              <div class="embed-footer">
+                <p class="embed-caption">💡 <strong>AI가 캠핑장 사진을 분석</strong>해서 개선점을 알려주는 서비스</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <!-- 2.6. 실제 사례 1 - 몽산포 솔비치 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="eyebrow">실제 적용 사례 1</div>
+        <div class="headline-block">
+          <p class="headline">
+            <span class="headline-line headline-line--accent">몽산포 솔비치 캠핑장</span>
+          </p>
+        </div>
+
+        <div class="case-study-layout">
+          <!-- 왼쪽: 웹사이트 임베디드 -->
+          <div class="case-embed-card">
+            <div class="embed-header">
+              <span class="embed-badge">🌐 Report</span>
+              <span class="embed-url">camfit.vercel.app/share/receE00tNLigzxeWf</span>
+            </div>
+            <iframe src="https://camfit.vercel.app/share/receE00tNLigzxeWf" class="embed-iframe-compact"
+              title="Mongsanpo Report" loading="lazy"></iframe>
+          </div>
+
+          <!-- 오른쪽: Finder 사진 폴더 뷰 -->
+          <div class="finder-window">
+            <div class="finder-header">
+              <div class="finder-buttons">
+                <span class="f-btn f-btn-red"></span>
+                <span class="f-btn f-btn-yellow"></span>
+                <span class="f-btn f-btn-green"></span>
+              </div>
+              <div class="finder-title">📁 몽산포 솔비치 사진 원본</div>
+            </div>
+            <div class="finder-body">
+              <div class="photo-grid">
+                <div class="photo-item"><img src="./images/mong/a.png" alt="Photo 1" /></div>
+                <div class="photo-item"><img src="./images/mong/b.png" alt="Photo 2" /></div>
+                <div class="photo-item"><img src="./images/mong/c.png" alt="Photo 3" /></div>
+                <div class="photo-item"><img src="./images/mong/e.png" alt="Photo 4" /></div>
+                <div class="photo-item"><img src="./images/mong/f.png" alt="Photo 5" /></div>
+                <div class="photo-item"><img src="./images/mong/g.png" alt="Photo 6" /></div>
+                <div class="photo-item"><img src="./images/mong/h.png" alt="Photo 7" /></div>
+                <div class="photo-item"><img src="./images/mong/i.png" alt="Photo 8" /></div>
+                <div class="photo-item"><img src="./images/mong/j.png" alt="Photo 9" /></div>
+                <div class="photo-item"><img src="./images/mong/k.png" alt="Photo 10" /></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card note-card--simple mt-20">
+          <p class="note-p text-center">
+            전문가가 찍은 사진을 AI가 분석하여 <strong>어떤 점이 좋고 부족한지</strong> 리포트로 제공합니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2.7. 실제 사례 2 - 구학 희망 캠핑장 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="eyebrow">실제 적용 사례 2</div>
+        <div class="headline-block">
+          <p class="headline">
+            <span class="headline-line headline-line--accent">구학 희망 캠핑장</span>
+          </p>
+        </div>
+
+        <div class="case-study-layout">
+          <!-- 왼쪽: 웹사이트 임베디드 -->
+          <div class="case-embed-card">
+            <div class="embed-header">
+              <span class="embed-badge">🌐 Report</span>
+              <span class="embed-url">camfit.vercel.app/share/recN0BmowZfE5U20C</span>
+            </div>
+            <iframe src="https://camfit.vercel.app/share/recN0BmowZfE5U20C" class="embed-iframe-compact"
+              title="Guhak Report" loading="lazy"></iframe>
+          </div>
+
+          <!-- 오른쪽: Finder 사진 폴더 뷰 -->
+          <div class="finder-window">
+            <div class="finder-header">
+              <div class="finder-buttons">
+                <span class="f-btn f-btn-red"></span>
+                <span class="f-btn f-btn-yellow"></span>
+                <span class="f-btn f-btn-green"></span>
+              </div>
+              <div class="finder-title">📁 구학 희망 캠핑장 사진 원본</div>
+            </div>
+            <div class="finder-body">
+              <div class="photo-grid">
+                <div class="photo-item"><img src="./images/guhak/ab.png" alt="Photo 1" /></div>
+                <div class="photo-item"><img src="./images/guhak/abab.png" alt="Photo 2" /></div>
+                <div class="photo-item"><img src="./images/guhak/ababab.png" alt="Photo 3" /></div>
+                <div class="photo-item"><img src="./images/guhak/sdgsdg.png" alt="Photo 4" /></div>
+                <div class="photo-item"><img src="./images/guhak/sdsd.png" alt="Photo 5" /></div>
+                <div class="photo-item"><img src="./images/guhak/trt.png" alt="Photo 6" /></div>
+                <div class="photo-item"><img src="./images/guhak/xcb.png" alt="Photo 7" /></div>
+                <div class="photo-item"><img src="./images/guhak/xcvb.png" alt="Photo 8" /></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card note-card--simple mt-20">
+          <p class="note-p text-center">
+            사진 퀄리티만 좋아져도 <strong>고객의 예약 전환율</strong>은 확실히 달라집니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 비개발자 인사이트 & 꿀팁 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="headline-block">
+          <p class="headline">
+            <span class="headline-line headline-line--accent">비개발자 입장에서 얻은 인사이트 & 꿀팁</span>
+          </p>
+        </div>
+
+        <div class="tips-grid">
+          <!-- 1 -->
+          <div class="tip-card">
+            <div class="tip-number">1</div>
+            <div class="tip-content">
+              <div class="tip-title">초기 <span class="text-accent">아키텍처(뼈대)</span>를 그리자</div>
+              <p class="tip-desc">
+                Gemini/GPT 등에 상세히 설명하고 뼈대를 탄탄히.<br />
+                <strong>'만들려는 서비스는 왜 필요할까?', '확장성 고려', '앱/웹 기반' 등</strong>
+              </p>
+            </div>
+          </div>
+
+          <!-- 2 -->
+          <div class="tip-card">
+            <div class="tip-number">2</div>
+            <div class="tip-content">
+              <div class="tip-title">무조건 <span class="text-accent">Accept</span> 말고 <span class="text-accent">플래닝</span>
+                보고 Accept</div>
+              <p class="tip-desc">
+                플래닝 단계를 <strong>보고 수락하자!</strong><br />
+                플래닝 단계를 보지 않고, 무조건적으로 수락하면, 다 만들어지고 또 다시 수정해야해서 시간이 더 걸린다.
+              </p>
+            </div>
+          </div>
+
+          <!-- 3 -->
+          <div class="tip-card">
+            <div class="tip-number">3</div>
+            <div class="tip-content">
+              <div class="tip-title"><span class="text-accent">Following Agent</span> 적극 활용하기!</div>
+              <p class="tip-desc">
+                "해줘"만 하면 나중에 <strong>결국에는 복잡한 업무에서 막힌다.</strong><br />
+                에이전트가 하는 일을 <strong>눈으로 보고,</strong> 코드가 어떻게 바뀌는지 <strong>또는 마우스가 이동하는 방향을 보면 조금씩 업무 속도 향상 및 이해에 도움이
+                  된다.</strong>
+              </p>
+            </div>
+          </div>
+
+          <!-- 4 -->
+          <div class="tip-card">
+            <div class="tip-number">4</div>
+            <div class="tip-content">
+              <div class="tip-title"><span class="text-accent">낯선 플랫폼/사이트</span> – 에이전트와 함께라면 생각보다 괜찮다</div>
+              <p class="tip-desc">
+                비개발자에게 낯선 사이트 플랫폼(github,vercel)도 에이전트와 같이 쓰면 부담이 덜하다.<br />
+                사이트를 돌아다니는 모습을 구경하면, 구성이 눈에 익기 시작합니다.
+              </p>
+            </div>
+          </div>
+
+          <!-- 5 -->
+          <div class="tip-card">
+            <div class="tip-number">5</div>
+            <div class="tip-content">
+              <div class="tip-title">에이전트와 함께라면 <span class="text-accent">타 서비스와 연동도</span> 어렵지 않다!</div>
+              <p class="tip-desc">
+                <strong>API는 생각보다 많이 열려있다!</strong><br />
+                에어테이블, 비즈뿌리오, 샵바이, 제미나이 등.
+              </p>
+            </div>
+          </div>
+
+          <!-- 6 -->
+          <div class="tip-card">
+            <div class="tip-number">6</div>
+            <div class="tip-content">
+              <div class="tip-title">모르는 용어는 비개발자를 위한 개발자 용어 설명해주는 <span class="text-accent">GEMs·GPTs</span>를 만들어서, 그때
+                그때 배워놓자!</div>
+              <p class="tip-desc">
+                비개발자 기준으로 그때그때 쉽게 설명해달라고 요청해서 만들어 두자.<br />
+                나오는 단어는 결국에는 또 나오고, 추후에는 간단한 수정은 comment 기능으로 간단하게 수정할 수 있다!
+              </p>
+            </div>
+          </div>
+
+          <!-- 7 -->
+          <div class="tip-card">
+            <div class="tip-number">7</div>
+            <div class="tip-content">
+              <div class="tip-title"><span class="text-accent">비교적 명확한 반복 업무 자동화</span>는 쉽다!</div>
+              <p class="tip-desc">
+                DB만 정교하게 쌓여있다면, 명확한 정보를 프레임워크 위에 띄워주는 건 <strong>바이브 코딩으로 큰 오류 없이 할 수 있다!</strong><br />
+                e.g) 크리에이터 프리미엄 협찬 신청 페이지
+              </p>
+            </div>
+          </div>
+
+          <!-- 8 -->
+          <div class="tip-card">
+            <div class="tip-number">8</div>
+            <div class="tip-content">
+              <div class="tip-title"><span class="text-accent">제미나이</span>를 붙여보자! (feat. gemini-3-flash)</div>
+              <p class="tip-desc">
+                특히 <strong>gemini-3-flash 모델</strong>은 일일 1000~1500회 무료 API 호출 가능!<br />
+                * 특정 웹페이지 긁어서 Gemini로 분석 후 Slack/문자/이메일 전송<br />
+                * DB 업데이트 및 특이사항 분석 자동화 등 활용도 무궁무진
+              </p>
+            </div>
+          </div>
+
+          <!-- 9 -->
+          <div class="tip-card">
+            <div class="tip-number">9</div>
+            <div class="tip-content">
+              <div class="tip-title"><span class="text-accent">안 되는 게 없다고</span> 생각하면 좋다</div>
+              <p class="tip-desc">
+                서버를 관리하기는 어렵겠지..? → 서버리스 배포 → 이미지 저장 허들 → <br />
+                <strong>알고보니, 쉬운 문제. 안 되는 게 없다고 생각하자!</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 초기 아키텍처 예시 (Tip 1 상세) -->
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="eyebrow">Tip 1 예시</div>
+        <div class="headline-block">
+          <p class="headline">
+            <span class="headline-line headline-line--accent">초기 아키텍처(뼈대) 그리기 – 실제 프롬프트 예시</span>
+          </p>
+        </div>
+        <p class="body-text" style="margin-bottom: 24px;">
+          AI에게 물어보기 전, <strong>무엇을 만들지 상세히 설명</strong>하고 뼈대를 탄탄히 세우는 것이 중요합니다.
+        </p>
+
+        <div class="example-grid">
+          <!-- 예시 1: AI 사진 분석 서비스 -->
+          <div class="example-card">
+            <div class="example-header">
+              <span class="example-badge">예시</span>
+              <span class="example-label">AI 사진 분석 서비스 – 초기 프롬프트</span>
+            </div>
+            <div class="example-body example-body--compact">
+              <div class="example-title">🏕️ 캠핏(Camfit) AI 그로쓰 에디터</div>
+              <div class="example-content">
+                <p class="example-section-title">서비스 개요</p>
+                <ul class="example-list">
+                  <li><strong>목적:</strong> 캠핑장 사진 업로드 → AI(Gemini)가 '캠핏 A급 표준'에 따라 분석</li>
+                  <li><strong>타겟:</strong> 캠핑장 운영자 및 관리자</li>
+                </ul>
+                <p class="example-section-title">핵심 UI 구성 요소</p>
+                <ul class="example-list">
+                  <li>Hero Section: 서비스 슬로건, 가치 제안</li>
+                  <li>Data Input: 캠핑장 정보 입력, 사진 업로드 UI</li>
+                  <li>AI Analysis Report: 종합 점수, 4대 지표 카드</li>
+                </ul>
+                <p class="example-section-title">기술적 요구사항</p>
+                <ul class="example-list">
+                  <li><strong>Framework:</strong> React / Next.js</li>
+                  <li><strong>Responsiveness:</strong> PC·모바일 반응형</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- 경고: 모바일 미고려 시 문제점 -->
+          <div class="example-card example-card--warning">
+            <div class="example-header example-header--warning">
+              <span class="example-badge example-badge--warning">⚠️ 주의</span>
+              <span class="example-label">모바일 고려 안 하면?</span>
+            </div>
+            <div class="example-body example-body--compact">
+              <div class="example-title example-title--warning">📱 모바일 미고려 시 발생한 문제</div>
+              <div class="example-content">
+                <div class="warning-message">
+                  <p class="warning-main">쓰는 캠지기들이 대부분 <strong>모바일에서 사용</strong>할 것을 고려하지 않음</p>
+                  <p class="warning-arrow">↓</p>
+                  <p class="warning-result">나중에 이를 <span class="text-accent">수정하는데 시간이 오래 걸림</span></p>
+                </div>
+                <div class="warning-tip">
+                  <p class="warning-tip-title">💡 교훈</p>
+                  <p class="warning-tip-text">초기 아키텍처 단계에서 <strong>"누가 어떤 기기로 쓸지"</strong>를 반드시 고려하자!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card note-card--simple" style="margin-top: 20px;">
+          <p class="note-p text-center">
+            💡 <strong>핵심 포인트:</strong> 만들려는 서비스가 <span class="text-accent">왜 필요한지</span>, <span
+              class="text-accent">확장성</span>은 어떻게 고려할지, <span class="text-accent">앱/웹 기반</span> 중 무엇으로 할지 등을 먼저 정리하자!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Tip 2&3 예시 - 플래닝 보고 Following Agent 활용 -->
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="eyebrow">Tip 2&3 예시</div>
+        <div class="headline-block">
+          <p class="headline">
+            <span class="headline-line headline-line--accent">플래닝을 보고 수락하고,<br />Following Agent 기능으로 무엇이 변화했는지
+              파악해보자!</span>
+          </p>
+        </div>
+
+        <div class="following-agent-grid">
+          <div class="following-agent-card">
+            <div class="following-agent-label">
+              <span class="following-agent-badge">1</span>
+              <span>플래닝 단계 – 에이전트의 구현 계획</span>
+            </div>
+            <img src="./planing.png" alt="Planning Stage Preview" class="following-agent-img" />
+          </div>
+          <div class="following-agent-card">
+            <div class="following-agent-label">
+              <span class="following-agent-badge following-agent-badge--alt">2</span>
+              <span>모니터링 – 파일 수정 확인</span>
+            </div>
+            <img src="./following_agent_2.png" alt="Following Agent - Code Changes" class="following-agent-img" />
+          </div>
+        </div>
+
+        <div class="note-card note-card--simple" style="margin-top: 16px;">
+          <p class="note-p text-center">
+            💡 <strong>핵심:</strong> "해줘"만 하지 말고, 에이전트가 <span class="text-accent">어떤 파일을 수정하는지</span>, <span
+              class="text-accent">어떤 로직을 추가하는지</span> 지켜보면 이해도가 쌍인다!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. 낯선 플랫폼/사이트 & 타 서비스 연동 (Tip 4 & 5 상세) -->
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="eyebrow">Tip 4 & 5 예시</div>
+        <div class="headline-block">
+          <p class="headline">
+            <span class="headline-line headline-line--accent">낯선 플랫폼/사이트 & 타 서비스 연동 –<br />에이전트와 함께라면 생각보다 괜찮다</span>
+          </p>
+        </div>
+
+        <div class="video-showcase">
+          <div class="video-card">
+            <div class="video-header">
+              <span class="video-badge">🎬</span>
+              <span class="video-title">Vercel에서 에어테이블 API Key를 넣어주는 모습</span>
+            </div>
+            <div class="video-body">
+              <video controls loop muted playsinline class="demo-video">
+                <source src="./ai_presentation.mov" type="video/quicktime">
+                <source src="./ai_presentation.mov" type="video/mp4">
+                브라우저가 비디오를 지원하지 않습니다.
+              </video>
+            </div>
+            <div class="video-footer">
+              <p class="video-caption">비개발자에게 낯선 사이트도 <strong>에이전트와 같이 쓰면 부담이 덜합니다</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card note-card--simple" style="margin-top: 16px;">
+          <p class="note-p text-center">
+            💡 <strong>핵심:</strong> 사이트를 돌아다니는 모습을 구경하면 <span class="text-accent">구성이 눈에 익기 시작</span>하고, <span
+              class="text-accent">API 연동도 어렵지 않아집니다!</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. GEMs·GPTs 만들기 (Tip 6 상세) -->
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="eyebrow">Tip 6 예시</div>
+        <div class="headline-block">
+          <p class="headline">
+            <span class="headline-line headline-line--accent">모르는 용어는 비개발자를 위한 GEMs·GPTs를 만들어서 익히자!</span>
+          </p>
+        </div>
+
+        <div class="gems-showcase">
+          <div class="gems-card">
+            <div class="gems-body">
+              <img src="./gems.png" alt="GEMs GPTs Example" class="gems-img" />
+            </div>
+            <div class="gems-footer">
+              <p class="gems-caption">비개발자 용어로 쉽게 설명해주는 <strong>나만의 맞춤형 선생님</strong>을 만들어두면 편리합니다.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-card note-card--simple" style="margin-top: 20px;">
+          <p class="note-p text-center">
+            💡 <strong>핵심:</strong> 모르는 용어가 나오면 당황하지 말고, <span class="text-accent">나만의 AI 튜터</span>에게 물어보며 하나씩 익혀나가세요!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. 비교적 명확한 반복 업무 자동화 (Tip 7 상세) -->
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="eyebrow">Tip 7 예시</div>
+        <div class="headline-block">
+          <p class="headline">
+            <span class="headline-line headline-line--accent">비교적 명확한 반복 업무 자동화는 쉽다!</span>
+          </p>
+        </div>
+        <p class="body-text" style="margin-bottom: 24px;">
+          DB만 정교하게 쌓여있다면, 프레임워크 위에 띄워주는 건 <strong>바이브 코딩으로 큰 오류 없이</strong> 할 수 있습니다. <br />
+          <span class="text-accent">e.g) 크리에이터 프리미엄 협찬 신청 페이지</span>
+        </p>
+
+        <div class="automation-diagram">
+          <!-- Airtable Base -->
+          <div class="at-base">
+            <div class="at-header">
+              <span class="at-icon">📊</span> Airtable Data
+            </div>
+            <div class="automation-diagram">
+              <!-- Left: Airtable Data -->
+              <div class="at-col">
+                <div class="col-header">
+                  <span class="at-icon">📊</span> Airtable Data
+                </div>
+                <div class="at-item-group">
+                  <div class="at-item at-item--1">
+                    <span class="at-emoji">🧑‍�</span> 크리에이터 명단
+                    <div class="at-connector"></div>
+                  </div>
+                  <div class="at-item at-item--2">
+                    <span class="at-emoji">🏕️</span> 캠핑장 명단
+                    <div class="at-connector"></div>
+                  </div>
+                  <div class="at-item at-item--3">
+                    <span class="at-emoji">📝</span> 신청 예약 리스트
+                    <div class="at-connector"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Embedded Web Service -->
+              <div class="ws-col">
+                <div class="col-header">
+                  <span class="ws-icon">🌐</span> Live Demo
+                </div>
+                <div class="embed-card" style="flex: 1; display: flex; flex-direction: column;">
+                  <div class="embed-header">
+                    <span class="embed-badge">🌐 크리에이터 포털</span>
+                    <span class="embed-url">camfit-creator.vercel.app</span>
+                  </div>
+                  <div class="embed-body" style="flex: 1;">
+                    <iframe src="https://camfit-creator.vercel.app/login" class="embed-iframe"
+                      style="height: 100%; min-height: 400px;" title="Creator Login Portal" loading="lazy"></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </section>
+
+    <!-- End Page -->
+    <section class="slide slide--outro">
+      <div class="slide-inner">
+        <div class="eyebrow">마무리</div>
+        <div class="headline-block">
+          <p class="headline">
+            <span class="headline-line">AI 에이전트와 함께</span><br />
+            <span class="headline-line headline-line--accent">일단 시작해보세요!</span>
+          </p>
+        </div>
+        <div class="outro-content">
+          <p class="body-text body-text--center">
+            비개발자도 충분히 할 수 있습니다.<br />
+            지금 바로 에이전트에게 말을 걸어보세요.
+          </p>
+          <div class="outro-contact" style="margin-top: 60px; text-align: center;">
+            <p class="intro-visual-line intro-visual-line--big"
+              style="font-size: 4rem; color: var(--color-accent); margin-bottom: 20px;">Thank You!</p>
+            <p class="body-text" style="opacity: 0.7;">발표 들어주셔서 감사합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const character = document.getElementById("floatingCharacter");
+
+    // Target values (what we want to reach)
+    let targetTranslateX = 0;
+    let targetTranslateY = 0;
+    let targetRotateX = 0;
+    let targetRotateY = 0;
+
+    // Current values (smoothed)
+    let currentTranslateX = 0;
+    let currentTranslateY = 0;
+    let currentRotateX = 0;
+    let currentRotateY = 0;
+
+    // Lerp factor (higher = more responsive, lower = smoother)
+    const lerpFactor = 0.12;
+
+    // Lerp function for smooth interpolation
+    function lerp(current, target, factor) {
+      return current + (target - current) * factor;
+    }
+
+    // Animation loop for smooth movement
+    function animate() {
+      // Smoothly interpolate all values
+      currentTranslateX = lerp(currentTranslateX, targetTranslateX, lerpFactor);
+      currentTranslateY = lerp(currentTranslateY, targetTranslateY, lerpFactor);
+      currentRotateX = lerp(currentRotateX, targetRotateX, lerpFactor);
+      currentRotateY = lerp(currentRotateY, targetRotateY, lerpFactor);
+
+      // Apply 3D transforms
+      if (character) {
+        character.style.transform = `
+          translateX(${currentTranslateX}px) 
+          translateY(${currentTranslateY}px) 
+          rotateX(${currentRotateX}deg) 
+          rotateY(${currentRotateY}deg)
+        `;
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    // Start animation loop
+    animate();
+
+    // Mouse move event to update target positions
+    document.addEventListener("mousemove", (e) => {
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+
+      // Calculate offset from center (-1 to 1 range)
+      const offsetX = (e.clientX - centerX) / centerX;
+      const offsetY = (e.clientY - centerY) / centerY;
+
+      // Translation (moves opposite to mouse - 3x more sensitive)
+      targetTranslateX = -offsetX * 50;
+      targetTranslateY = -offsetY * 40;
+
+      // 3D Rotation (tilts towards mouse - up to 20 degrees)
+      targetRotateY = offsetX * 20;
+      targetRotateX = -offsetY * 15;
+    });
+
+    // Reset on mouse leave
+    document.addEventListener("mouseleave", () => {
+      targetTranslateX = 0;
+      targetTranslateY = 0;
+      targetRotateX = 0;
+      targetRotateY = 0;
+    });
+  </script>
+</body>
+
+</html>
